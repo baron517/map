@@ -1,0 +1,88 @@
+<!-- 重点参数：setIconStyle, setIconLabel -->
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_835224_y10ur2clghg.css">
+    <style>
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+        }
+        .amap-logo,.amap-copyright{display: none!important;}
+        .amap-marker-label {
+            font-size: 13px;
+            border: 1px solid orange;
+            background: #fff;
+            border-radius: 10px 0 0 0;
+            color: #690441;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+<div id="container"></div>
+<script type="text/javascript" src='//webapi.amap.com/maps?v=1.4.10&key=3eb43430e8b071ba30f8ae473ab4e401'></script>
+<script src="https://unpkg.com/flyio/dist/fly.min.js"></script>
+<script type="text/javascript">
+    //创建地图
+
+
+
+
+    var map = new AMap.Map('container', {
+        resizeEnable: true,
+        zoom: 18
+    });
+
+    map.plugin(['AMap.ToolBar'], function() {
+        //设置地位标记为自定义标记
+        var toolBar = new AMap.ToolBar();
+        map.addControl(toolBar);
+    });
+
+
+
+
+    fly.get('http://www.cnvr66.top/crmapp/v1/get-covers')
+            .then(function (response) {
+                console.log(response.data.code);
+                var data=response.data;
+                if(data.code==0)
+                {
+                    for(var i=0;i<data.data.length;i++)
+                    {
+                        var size=data.data[i].diameter/20;
+                        new AMap.Marker({
+                            map: map,
+                            position: [data.data[i].lon, data.data[i].lat],
+                            draggable: true,
+                            content: '<i style="font-size:'+size+'px" class="iconfont icon-famen"></i>'
+                        });
+                    }
+                }
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+
+
+
+
+
+</script>
+</body>
+
+</html>
