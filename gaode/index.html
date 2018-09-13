@@ -31,17 +31,22 @@
 
 <body>
 <div id="container"></div>
-<script type="text/javascript" src='//webapi.amap.com/maps?v=1.4.10&key=3eb43430e8b071ba30f8ae473ab4e401'></script>
+<script type="text/javascript" src='//webapi.amap.com/maps?v=1.4.10&key=3eb43430e8b071ba30f8ae473ab4e401&plugin=ElasticMarker'></script>
+<script src="js/common.js"></script>
+<script src="lib/jquery.js"></script>
 <script src="https://unpkg.com/flyio/dist/fly.min.js"></script>
 <script type="text/javascript">
     //创建地图
 
-
-
-
     var map = new AMap.Map('container', {
-        resizeEnable: true,
-        zoom: 18
+
+        turboMode:false,
+        showIndoorMap:false,
+        defaultCursor:'pointer',
+        zooms:[14,20],
+        zoom:18,
+        pitch:55,
+        forceVector:true
     });
 
     map.plugin(['AMap.ToolBar'], function() {
@@ -51,9 +56,18 @@
     });
 
 
+    var facilities = [];
+    var zoomStyleMapping1 = {
+        14:0,
+        15:0,
+        16:0,
+        17:0,
+        18:0,
+        19:0,
+        20:0
+    }
 
-
-    fly.get('http://www.cnvr66.top/crmapp/v1/get-covers')
+    fly.get(serverUrl+'get-covers')
             .then(function (response) {
                 console.log(response.data.code);
                 var data=response.data;
@@ -61,15 +75,73 @@
                 {
                     for(var i=0;i<data.data.length;i++)
                     {
-                        var size=data.data[i].diameter/20;
-                        new AMap.Marker({
-                            map: map,
-                            position: [data.data[i].lon, data.data[i].lat],
-                            draggable: true,
-                            content: '<i style="font-size:'+size+'px" class="iconfont icon-famen"></i>'
+                        var size=data.data[i].diameter/30;
+
+                            var marker = new AMap.ElasticMarker({
+                                position:[data.data[i].lon, data.data[i].lat],
+                                styles:[{
+                                    icon:{
+                                        img:"img/famen.png",
+                                        size:[size,size],//可见区域的大小
+                                        ancher:[8,16],//锚点
+                                        fitZoom:14,//最合适的级别
+                                        scaleFactor:2,//地图放大一级的缩放比例系数
+                                        maxScale:1.4,//最大放大比例
+                                        minScale:0.8//最小放大比例
+                                    }
+                                }],
+                                zoomStyleMapping:zoomStyleMapping1
+                            })
+                            facilities.push(marker);
+
+
+
+                    }
+
+                    map.add(facilities)
+
+                }
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+    //获取点击坐标
+    map.on('click',function(e){
+        console.log(e.lnglat+'')
+    })
+
+
+    var polygonArr =[];
+
+    fly.get(serverUrl+'get-areas?areatype=2')
+            .then(function (response) {
+                console.log(response.data);
+                var data=response.data;
+
+                if(data.code==0)
+                {
+                    for(var i=0;i<data.data.length;i++)
+                    {
+                        
+                        polygonArr.push([116.403322, 39.920255]);
+                        var  polygon = new AMap.Polygon({
+                            path: polygonArr,//设置多边形边界路径
+                            strokeColor: "#FF33FF", //线颜色
+                            strokeOpacity: 0.2, //线透明度
+                            strokeWeight: 3,    //线宽
+                            fillColor: "#1791fc", //填充色
+                            fillOpacity: 0.35//填充透明度
                         });
                     }
+
                 }
+
+
+                polygon.setMap(map);
+
 
             })
             .catch(function (error) {
