@@ -89,6 +89,8 @@
         }
 
         #noList{padding:10px;word-break: break-all;word-wrap: break-word;}
+        /*#noList>div{position: relative;padding-left:66px;}
+        #noList>div label{width:80px;display: inline-block;position: absolute;left:0;top:0;}*/
 
         #search input[type=button]{background: #029acb;border:0;color:#fff;cursor: pointer;}
         #search input{height:24px;display: inline-block;vertical-align: middle;line-height: 24px;box-sizing: border-box;}
@@ -120,19 +122,19 @@
     <div class="title">工具</div>
 
     <ul>
-        <li class="active">
+        <li class="active" id="shoudong">
             <i class="iconfont icon-shou"></i>
             手动
         </li>
-        <li>
+        <li id="zidong">
             <i class="iconfont icon-24"></i>
             自动
         </li>
 
-        <li id="save">
+       <!-- <li id="save">
             <i class="iconfont icon-baocun"></i>
             保存
-        </li>
+        </li>-->
 
         <li id="clear">
             <i class="iconfont icon-baocun"></i>
@@ -163,6 +165,15 @@
         clear();
     });
 
+    $(document).keyup(function(event){
+
+        switch(event.keyCode) {
+            case 27:
+                clear();
+
+        }
+    });
+
     //输入提示
     var autoOptions = {
         input: "tipinput"
@@ -175,14 +186,14 @@
     function select(e) {
 
         console.log(e);
-        map.setZoomAndCenter(16, [e.poi.location.lng, e.poi.location.lat]);
+        map.setZoomAndCenter(20, [e.poi.location.lng, e.poi.location.lat]);
         /*placeSearch.setCity(e.poi.adcode);
         placeSearch.search(e.poi.name);  //关键字查询查询*/
     }
 
 
 
-    $("#save").click(function()
+    function save()
     {
         if(circlePointList.length<3)
         {
@@ -217,126 +228,137 @@
 
             if(areaPoint.length>0)
             {
-                layer.prompt({title: '输入区块名称', formType: 0}, function(pass, index){
-                    layer.close(index);
+                layer.prompt({title: '输入区块名称', formType: 0,
+                    btn2: function(index, layero){
+                        clear();
+                    },
+                    cancel: function(index){
+                        clear();
+                    }},
+                    function(pass, index){
+                layer.close(index);
 
 
-                    $.ajax({
-                        url: serverUrl+'create-area',
-                        type: 'POST',
-                        data: {
-                            covers: areaPoint,
-                            areaname: pass,
-                            areatype:2
-                        },
-                        dataType: 'json',
-                        success: function (data) {
+                $.ajax({
+                    url: serverUrl+'create-area',
+                    type: 'POST',
+                    data: {
+                        covers: areaPoint,
+                        areaname: pass,
+                        areatype:2
+                    },
+                    dataType: 'json',
+                    success: function (data) {
 
-                            console.log(data);
-                            if(data.code==0)
+                        console.log(data);
+                        if(data.code==0)
+                        {
+                            clear();
+
+
+                            var res=[];
+                            var n=newPoint.length;
+
+                            if(n>2)
                             {
-                                clear();
+                                Graham_scan(newPoint,res,n);
+                                var pArray=res;
+                                var dpArray=initDPList(pArray);
+                                var ndpArray=initNDPList(dpArray);
+                                var list=computeLine(0.00008,ndpArray,pArray);
 
+                                //console.log(list);
 
-                                var res=[];
-                                var n=newPoint.length;
+                                var  newPolygon = new AMap.Polygon({
+                                    path: list,//设置多边形边界路径
+                                    strokeColor: "#FF33FF", //线颜色
+                                    strokeOpacity: 0.8, //线透明度
+                                    strokeWeight: 2,    //线宽
+                                    fillColor: "#1791fc", //填充色
+                                    fillOpacity: 0.35//填充透明度
+                                });
 
-                                if(n>2)
-                                {
-                                    Graham_scan(newPoint,res,n);
-                                    var pArray=res;
-                                    var dpArray=initDPList(pArray);
-                                    var ndpArray=initNDPList(dpArray);
-                                    var list=computeLine(0.00008,ndpArray,pArray);
+                                newPolygon.mid=areaPoint;
+                                newPolygon.m_name=pass;
+                                newPolygon.covernum=n;
 
-                                    console.log(list);
+                                AMap.event.addListener(newPolygon, 'mouseover', function(e) {
 
-                                    var  newPolygon = new AMap.Polygon({
-                                        path: list,//设置多边形边界路径
-                                        strokeColor: "#FF33FF", //线颜色
-                                        strokeOpacity: 0.8, //线透明度
-                                        strokeWeight: 5,    //线宽
-                                        fillColor: "#1791fc", //填充色
-                                        fillOpacity: 0.35//填充透明度
-                                    });
+                                    selectedMarker=[];
+                                    console.log(e.target.mid);
+                                    var pList=e.target.mid.split(",");
+                                    $("#noList").html("<div><label>区块名称：</label>"+ e.target.m_name+"</div><div><label>阀门编号：</label>"+e.target.mid+"</div><div><label>阀门个数：</label>"+ e.target.covernum+"</div>");
+                                    $("#noList").show();
+                                    e.target.setOptions({"fillColor":"#8968CD",fillOpacity:0.8});
 
-                                    newPolygon.mid=areaPoint;
-
-                                    AMap.event.addListener(newPolygon, 'mouseover', function(e) {
-
-                                        selectedMarker=[];
-                                        console.log(e.target.mid);
-                                        var pList=e.target.mid.split(",");
-                                        $("#noList").text("编号："+e.target.mid);
-                                        $("#noList").show();
-                                        e.target.setOptions({"fillColor":"#8968CD",fillOpacity:0.8});
-
-                                        for(var j=0;j<pList.length;j++)
+                                    for(var j=0;j<pList.length;j++)
+                                    {
+                                        for(var i=0;i<facilities.length;i++)
                                         {
-                                            for(var i=0;i<facilities.length;i++)
+                                            if(pList[j]==facilities[i].mid)
                                             {
-                                                if(pList[j]==facilities[i].mid)
-                                                {
-                                                    var obj=facilities[i].A.L.Vg;
-                                                    $(obj).addClass("active");
-                                                    selectedMarker.push(facilities[i]);
-                                                    break;
-                                                }
+                                                var obj=facilities[i].A.L.Vg;
+                                                $(obj).addClass("active");
+                                                selectedMarker.push(facilities[i]);
+                                                break;
                                             }
                                         }
+                                    }
 
 
 
-                                    }, false);
+                                }, false);
 
-                                    AMap.event.addListener(newPolygon, 'mouseout', function(e) {
+                                AMap.event.addListener(newPolygon, 'mouseout', function(e) {
 
-                                        console.log(e.target.mid);
-                                        $("#noList").hide();
-                                        e.target.setOptions({"fillColor":"#1791fc",fillOpacity:0.35});
-                                        var pList=e.target.mid.split(",");
-                                        for(var j=0;j<pList.length;j++)
+                                    console.log(e.target.mid);
+                                    $("#noList").hide();
+                                    e.target.setOptions({"fillColor":"#1791fc",fillOpacity:0.35});
+                                    var pList=e.target.mid.split(",");
+                                    for(var j=0;j<pList.length;j++)
+                                    {
+                                        for(var i=0;i<facilities.length;i++)
                                         {
-                                            for(var i=0;i<facilities.length;i++)
+                                            if(pList[j]==facilities[i].mid)
                                             {
-                                                if(pList[j]==facilities[i].mid)
-                                                {
-                                                    var obj=facilities[i].A.L.Vg;
-                                                    $(obj).removeClass("active");
-                                                    selectedMarker.push(facilities[i]);
-                                                    break;
-                                                }
+                                                var obj=facilities[i].A.L.Vg;
+                                                $(obj).removeClass("active");
+                                                selectedMarker.push(facilities[i]);
+                                                break;
                                             }
                                         }
+                                    }
 
 
-                                    }, false);
+                                }, false);
 
-                                    newPolygon.setMap(map);
-
-
+                                newPolygon.setMap(map);
 
 
-
-                                }
-
-
-                                layer.alert("创建区块成功");
 
 
 
                             }
 
-                        }
-                    });
 
+                            layer.alert("创建区块成功");
+
+
+
+                        }
+
+                    }
                 });
+
+            }
+                    );
 
 
             }
             else
             {
                 layer.alert("不存在阀门在封闭区域");
+                clear();
             }
 
 
@@ -345,7 +367,7 @@
 
         }
 
-    });
+    }
 
 
     function clear()
@@ -356,8 +378,31 @@
         }
         circleMarkerList=[];
         circlePointList=[];
+        map.remove(polyline);
 
     }
+
+
+    $("#shoudong").click(function()
+    {
+        $(".tool ul li").removeClass("active");
+        $(this).addClass("active");
+        for(var i=0;i<polygonList.length;i++)
+        {
+            polygonList[i].hide();
+        }
+    });
+
+    $("#zidong").click(function()
+    {
+        $(".tool ul li").removeClass("active");
+        $(this).addClass("active");
+        for(var i=0;i<polygonList.length;i++)
+        {
+            polygonList[i].show();
+        }
+
+    });
 
 
     //创建地图
@@ -440,7 +485,7 @@
                         marker.mid=data.data[i].id;
 
                         AMap.event.addListener(marker, 'mouseover', function(e) {
-                            console.log(e.target.A.L.Vg);
+                            //console.log(e.target.A.L.Vg);
 
                             var mid=e.target.mid;
                             e.target.setTitle("编号："+mid);
@@ -454,7 +499,6 @@
                     map.add(facilities)
 
                     getAreas();
-
                 }
 
             })
@@ -467,14 +511,41 @@
     //获取点击坐标
     var circlePointList=[];
     var circleMarkerList=[];
+    var polyline;
     map.on('click',function(e){
         console.log(e.lnglat);
 
         circlePointList.push(e.lnglat);
 
+        // 创建折线实例
+        var juli=Math.sqrt((e.lnglat.lng-circlePointList[0].lng)*(e.lnglat.lng-circlePointList[0].lng)+(e.lnglat.lat-circlePointList[0].lat)*(e.lnglat.lat-circlePointList[0].lat));
+
+        console.log(juli);
+
+        if(polyline)
+        {
+            map.remove(polyline);
+        }
+
+        polyline = new AMap.Polyline({
+            path: circlePointList,
+            borderWeight: 2, // 线条宽度，默认为 1
+            strokeColor: 'rgba(0,0,255,1)', // 线条颜色
+            lineJoin: 'round' // 折线拐点连接处样式
+        });
+
+        // 将折线添加至地图实例
+        map.add(polyline);
+
+        if(circlePointList.length>2&&juli<0.00005)
+        {
+            save();
+            return;
+        }
+
         var circleMarker = new AMap.CircleMarker({
             center:e.lnglat,
-            radius:12,//3D视图下，CircleMarker半径不要超过64px
+            radius:5,//3D视图下，CircleMarker半径不要超过64px
             strokeColor:'white',
             strokeWeight:2,
             strokeOpacity:0.5,
@@ -491,13 +562,20 @@
         circleMarker.setMap(map);
 
 
+
+
+
+
+
+
     })
 
 
     var selectedMarker=[];
+    var polygonList=[];
     function getAreas()
     {
-        fly.get(serverUrl+'get-areas?areatype=2')
+        fly.get(serverUrl+'get-areas?areatype=1')
                 .then(function (response) {
                     console.log(response.data);
                     var data=response.data;
@@ -535,26 +613,31 @@
                             var dpArray=initDPList(pArray);
                             var ndpArray=initNDPList(dpArray);
                             var list=computeLine(0.00008,ndpArray,pArray);
-                                console.log(polygonArr);
-                                console.log(list);
+                                /*console.log(polygonArr);
+                                console.log(list);*/
 
                                 var  polygon = new AMap.Polygon({
                                     path: list,//设置多边形边界路径
                                     strokeColor: "#FF33FF", //线颜色
                                     strokeOpacity: 0.8, //线透明度
-                                    strokeWeight: 3,    //线宽
+                                    strokeWeight: 2,    //线宽
+                                    visible:false,
                                     fillColor: "#1791fc", //填充色
                                     fillOpacity: 0.35//填充透明度
                                 });
 
                                 polygon.mid=data.data[i].covers;
+                                polygon.m_name=data.data[i].name;
+                                polygon.covernum=data.data[i].covernum;
 
+                                console.log("polygon"+polygon);
+                                polygonList.push(polygon);
                                 AMap.event.addListener(polygon, 'mouseover', function(e) {
 
                                     selectedMarker=[];
                                     console.log(e.target.mid);
                                     var pList=e.target.mid.split(",");
-                                    $("#noList").text("编号："+e.target.mid);
+                                    $("#noList").html("<div><label>区块名称：</label>"+ e.target.m_name+"</div><div><label>阀门编号：</label>"+e.target.mid+"</div><div><label>阀门个数：</label>"+ e.target.covernum+"</div>");
                                     $("#noList").show();
                                     e.target.setOptions({"fillColor":"#8968CD",fillOpacity:0.8});
 
