@@ -2,19 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd1be049-c2d9-4f66-ba02-f241e474e2c9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/img/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/lib/layer/theme/default/icon-ext.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/lib/layer/theme/default/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/lib/layer/theme/default/loading-0.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/lib/layer/theme/default/loading-1.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/lib/layer/theme/default/loading-2.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/lib/layer/layer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/lib/layer/mobile/layer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/lib/layer/mobile/need/layer.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/lib/layer/theme/default/layer.css" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gaode/doc/~$巡检V1.2版本接口需求-0905(1).docx" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/img/1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/img/2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/index1.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/lib/fly.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaode/tubao.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gaode/img/logo.png" afterPath="$PROJECT_DIR$/gaode/img/logo.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gaode/index.html" afterPath="$PROJECT_DIR$/gaode/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gaode/js/common.js" afterPath="$PROJECT_DIR$/gaode/js/common.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gaode/test.html" afterPath="$PROJECT_DIR$/gaode/test.html" />
     </list>
     <ignored path="map.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,10 +36,37 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gaode/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22916667">
-              <caret line="27" column="67" selection-start-line="27" selection-start-column="67" selection-end-line="27" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.58992803">
+              <caret line="262" column="60" selection-start-line="262" selection-start-column="60" selection-end-line="262" selection-end-column="60" />
               <folding>
-                <element signature="e#5440#6704#0" expanded="false" />
+                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#8492#9796#0" expanded="false" />
+                <element signature="e#9051#9755#0" expanded="false" />
+                <element signature="e#9902#11070#0" expanded="false" />
+                <element signature="e#11497#11679#0" expanded="false" />
+                <element signature="e#11734#11951#0" expanded="false" />
+                <element signature="e#14870#15445#0" expanded="false" />
+                <element signature="e#17209#17618#0" expanded="false" />
+                <element signature="e#17777#19001#0" expanded="false" />
+                <element signature="e#18304#18964#0" expanded="false" />
+                <element signature="e#19100#20196#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fly.min.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gaode/lib/fly.min.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="3" column="5909" selection-start-line="3" selection-start-column="5909" selection-end-line="3" selection-end-column="5909" />
+              <folding>
+                <element signature="e#0#49#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -51,8 +75,8 @@
       <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gaode/test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.088889">
-              <caret line="37" column="38" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="44" column="29" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -62,9 +86,27 @@
         <entry file="file://$PROJECT_DIR$/gaode/js/common.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="13" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="13" />
+              <caret line="133" column="1" selection-start-line="133" selection-start-column="1" selection-end-line="133" selection-end-column="1" />
               <folding>
                 <element signature="e#0#45#0" expanded="false" />
+                <element signature="n#!!block;n#Graham_scan#0" expanded="false" />
+                <element signature="n#!!block;n#initDPList#0" expanded="false" />
+                <element signature="n#!!block;n#initNDPList#0" expanded="false" />
+                <element signature="n#!!block;n#computeLine#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tubao.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gaode/tubao.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="153" column="29" selection-start-line="153" selection-start-column="7" selection-end-line="153" selection-end-column="29" />
+              <folding>
+                <element signature="e#1897#1969#0" expanded="false" />
+                <element signature="e#2011#2156#0" expanded="false" />
+                <element signature="e#2196#3929#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -86,8 +128,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/gaode/index1.html" />
+        <option value="$PROJECT_DIR$/gaode/tubao.html" />
         <option value="$PROJECT_DIR$/gaode/js/common.js" />
         <option value="$PROJECT_DIR$/gaode/test.html" />
+        <option value="$PROJECT_DIR$/gaode/lib/fly.min.js" />
         <option value="$PROJECT_DIR$/gaode/index.html" />
       </list>
     </option>
@@ -104,8 +149,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1932" />
-    <option name="height" value="1056" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -132,6 +177,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -210,8 +257,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -221,11 +266,15 @@
     <property name="js-jscs-nodeInterpreter" value="D:\Tool\nodejs\node.exe" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\YunFile\github\map\gaode" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\YunFile\github\map" />
+      <recent name="D:\YunFile\github\map\gaode\img" />
       <recent name="E:\github\map\gaode\img" />
       <recent name="E:\github\map\gaode\lib" />
       <recent name="D:\YunFile\github\map\gaode\doc" />
-      <recent name="D:\YunFile\github\map\gaode\lib" />
     </key>
   </component>
   <component name="RunManager">
@@ -272,12 +321,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3440171" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1913767" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -307,7 +356,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -317,8 +366,156 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#5440#6704#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8492#9796#0" expanded="false" />
+            <element signature="e#9051#9755#0" expanded="false" />
+            <element signature="e#9902#11070#0" expanded="false" />
+            <element signature="e#11497#11679#0" expanded="false" />
+            <element signature="e#11734#11951#0" expanded="false" />
+            <element signature="e#14870#15445#0" expanded="false" />
+            <element signature="e#17209#17618#0" expanded="false" />
+            <element signature="e#17777#19001#0" expanded="false" />
+            <element signature="e#18304#18964#0" expanded="false" />
+            <element signature="e#19100#20196#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="29" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="133" column="1" selection-start-line="133" selection-start-column="1" selection-end-line="133" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#45#0" expanded="false" />
+            <element signature="n#!!block;n#Graham_scan#0" expanded="false" />
+            <element signature="n#!!block;n#initDPList#0" expanded="false" />
+            <element signature="n#!!block;n#initNDPList#0" expanded="false" />
+            <element signature="n#!!block;n#computeLine#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/tubao.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="153" column="29" selection-start-line="153" selection-start-column="7" selection-end-line="153" selection-end-column="29" />
+          <folding>
+            <element signature="e#1897#1969#0" expanded="false" />
+            <element signature="e#2011#2156#0" expanded="false" />
+            <element signature="e#2196#3929#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8492#9796#0" expanded="false" />
+            <element signature="e#9051#9755#0" expanded="false" />
+            <element signature="e#9902#11070#0" expanded="false" />
+            <element signature="e#11497#11679#0" expanded="false" />
+            <element signature="e#11734#11951#0" expanded="false" />
+            <element signature="e#14870#15445#0" expanded="false" />
+            <element signature="e#17209#17618#0" expanded="false" />
+            <element signature="e#17777#19001#0" expanded="false" />
+            <element signature="e#18304#18964#0" expanded="false" />
+            <element signature="e#19100#20196#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8492#9796#0" expanded="false" />
+            <element signature="e#9051#9755#0" expanded="false" />
+            <element signature="e#9902#11070#0" expanded="false" />
+            <element signature="e#11497#11679#0" expanded="false" />
+            <element signature="e#11734#11951#0" expanded="false" />
+            <element signature="e#14870#15445#0" expanded="false" />
+            <element signature="e#17209#17618#0" expanded="false" />
+            <element signature="e#17777#19001#0" expanded="false" />
+            <element signature="e#18304#18964#0" expanded="false" />
+            <element signature="e#19100#20196#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="7" selection-start-line="30" selection-start-column="4" selection-end-line="32" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8492#9796#0" expanded="false" />
+            <element signature="e#9051#9755#0" expanded="false" />
+            <element signature="e#9902#11070#0" expanded="false" />
+            <element signature="e#11497#11679#0" expanded="false" />
+            <element signature="e#11734#11951#0" expanded="false" />
+            <element signature="e#14870#15445#0" expanded="false" />
+            <element signature="e#17209#17618#0" expanded="false" />
+            <element signature="e#17777#19001#0" expanded="false" />
+            <element signature="e#18304#18964#0" expanded="false" />
+            <element signature="e#19100#20196#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -328,24 +525,346 @@
           <caret line="3" column="13" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="13" />
           <folding>
             <element signature="e#0#45#0" expanded="false" />
+            <element signature="n#!!block;n#Graham_scan#0" expanded="false" />
+            <element signature="n#!!block;n#initDPList#0" expanded="false" />
+            <element signature="n#!!block;n#initNDPList#0" expanded="false" />
+            <element signature="n#!!block;n#computeLine#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8492#9796#0" expanded="false" />
+            <element signature="e#9051#9755#0" expanded="false" />
+            <element signature="e#9902#11070#0" expanded="false" />
+            <element signature="e#11497#11679#0" expanded="false" />
+            <element signature="e#11734#11951#0" expanded="false" />
+            <element signature="e#14870#15445#0" expanded="false" />
+            <element signature="e#17209#17618#0" expanded="false" />
+            <element signature="e#17777#19001#0" expanded="false" />
+            <element signature="e#18304#18964#0" expanded="false" />
+            <element signature="e#19100#20196#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gaode/test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.088889">
-          <caret line="37" column="38" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#45#0" expanded="false" />
+            <element signature="n#!!block;n#Graham_scan#0" expanded="false" />
+            <element signature="n#!!block;n#initDPList#0" expanded="false" />
+            <element signature="n#!!block;n#initNDPList#0" expanded="false" />
+            <element signature="n#!!block;n#computeLine#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gaode/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22916667">
-          <caret line="27" column="67" selection-start-line="27" selection-start-column="67" selection-end-line="27" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#5440#6704#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8492#9796#0" expanded="false" />
+            <element signature="e#9051#9755#0" expanded="false" />
+            <element signature="e#9902#11070#0" expanded="false" />
+            <element signature="e#11497#11679#0" expanded="false" />
+            <element signature="e#11734#11951#0" expanded="false" />
+            <element signature="e#14870#15445#0" expanded="false" />
+            <element signature="e#17209#17618#0" expanded="false" />
+            <element signature="e#17777#19001#0" expanded="false" />
+            <element signature="e#18304#18964#0" expanded="false" />
+            <element signature="e#19100#20196#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#45#0" expanded="false" />
+            <element signature="n#!!block;n#Graham_scan#0" expanded="false" />
+            <element signature="n#!!block;n#initDPList#0" expanded="false" />
+            <element signature="n#!!block;n#initNDPList#0" expanded="false" />
+            <element signature="n#!!block;n#computeLine#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8492#9796#0" expanded="false" />
+            <element signature="e#9051#9755#0" expanded="false" />
+            <element signature="e#9902#11070#0" expanded="false" />
+            <element signature="e#11497#11679#0" expanded="false" />
+            <element signature="e#11734#11951#0" expanded="false" />
+            <element signature="e#14870#15445#0" expanded="false" />
+            <element signature="e#17209#17618#0" expanded="false" />
+            <element signature="e#17777#19001#0" expanded="false" />
+            <element signature="e#18304#18964#0" expanded="false" />
+            <element signature="e#19100#20196#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#45#0" expanded="false" />
+            <element signature="n#!!block;n#Graham_scan#0" expanded="false" />
+            <element signature="n#!!block;n#initDPList#0" expanded="false" />
+            <element signature="n#!!block;n#initNDPList#0" expanded="false" />
+            <element signature="n#!!block;n#computeLine#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8492#9796#0" expanded="false" />
+            <element signature="e#9051#9755#0" expanded="false" />
+            <element signature="e#9902#11070#0" expanded="false" />
+            <element signature="e#11497#11679#0" expanded="false" />
+            <element signature="e#11734#11951#0" expanded="false" />
+            <element signature="e#14870#15445#0" expanded="false" />
+            <element signature="e#17209#17618#0" expanded="false" />
+            <element signature="e#17777#19001#0" expanded="false" />
+            <element signature="e#18304#18964#0" expanded="false" />
+            <element signature="e#19100#20196#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#45#0" expanded="false" />
+            <element signature="n#!!block;n#Graham_scan#0" expanded="false" />
+            <element signature="n#!!block;n#initDPList#0" expanded="false" />
+            <element signature="n#!!block;n#initNDPList#0" expanded="false" />
+            <element signature="n#!!block;n#computeLine#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8492#9796#0" expanded="false" />
+            <element signature="e#9051#9755#0" expanded="false" />
+            <element signature="e#9902#11070#0" expanded="false" />
+            <element signature="e#11497#11679#0" expanded="false" />
+            <element signature="e#11734#11951#0" expanded="false" />
+            <element signature="e#14870#15445#0" expanded="false" />
+            <element signature="e#17209#17618#0" expanded="false" />
+            <element signature="e#17777#19001#0" expanded="false" />
+            <element signature="e#18304#18964#0" expanded="false" />
+            <element signature="e#19100#20196#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="20" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#45#0" expanded="false" />
+            <element signature="n#!!block;n#Graham_scan#0" expanded="false" />
+            <element signature="n#!!block;n#initDPList#0" expanded="false" />
+            <element signature="n#!!block;n#initNDPList#0" expanded="false" />
+            <element signature="n#!!block;n#computeLine#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8492#9796#0" expanded="false" />
+            <element signature="e#9051#9755#0" expanded="false" />
+            <element signature="e#9902#11070#0" expanded="false" />
+            <element signature="e#11497#11679#0" expanded="false" />
+            <element signature="e#11734#11951#0" expanded="false" />
+            <element signature="e#14870#15445#0" expanded="false" />
+            <element signature="e#17209#17618#0" expanded="false" />
+            <element signature="e#17777#19001#0" expanded="false" />
+            <element signature="e#18304#18964#0" expanded="false" />
+            <element signature="e#19100#20196#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/index1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.071428">
+          <caret line="183" column="21" selection-start-line="183" selection-start-column="21" selection-end-line="183" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/tubao.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="153" column="29" selection-start-line="153" selection-start-column="7" selection-end-line="153" selection-end-column="29" />
+          <folding>
+            <element signature="e#1897#1969#0" expanded="false" />
+            <element signature="e#2011#2156#0" expanded="false" />
+            <element signature="e#2196#3929#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="133" column="1" selection-start-line="133" selection-start-column="1" selection-end-line="133" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#45#0" expanded="false" />
+            <element signature="n#!!block;n#Graham_scan#0" expanded="false" />
+            <element signature="n#!!block;n#initDPList#0" expanded="false" />
+            <element signature="n#!!block;n#initNDPList#0" expanded="false" />
+            <element signature="n#!!block;n#computeLine#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="29" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/lib/fly.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="5909" selection-start-line="3" selection-start-column="5909" selection-end-line="3" selection-end-column="5909" />
+          <folding>
+            <element signature="e#0#49#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gaode/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.58992803">
+          <caret line="262" column="60" selection-start-line="262" selection-start-column="60" selection-end-line="262" selection-end-column="60" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#8492#9796#0" expanded="false" />
+            <element signature="e#9051#9755#0" expanded="false" />
+            <element signature="e#9902#11070#0" expanded="false" />
+            <element signature="e#11497#11679#0" expanded="false" />
+            <element signature="e#11734#11951#0" expanded="false" />
+            <element signature="e#14870#15445#0" expanded="false" />
+            <element signature="e#17209#17618#0" expanded="false" />
+            <element signature="e#17777#19001#0" expanded="false" />
+            <element signature="e#18304#18964#0" expanded="false" />
+            <element signature="e#19100#20196#0" expanded="false" />
           </folding>
         </state>
       </provider>
