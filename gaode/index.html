@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
     <title>首页</title>
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_835224_fgwk2qplle.css">
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_835224_x8zv8c5it8o.css">
     <style>
         html,
         body,
@@ -102,7 +102,7 @@
 
 <body>
 
-<div style="position: absolute;width:100%;height:100%;top:0;left:0;z-index:10000;background: rgba(0,0,0,0.5);" id="loading">
+<div style="position: absolute;width:100%;height:100%;top:0;left:0;z-index:10000;background: rgba(0,0,0,0.5);display: none;" id="loading">
 <div class="sk-wave" style="position: relative;top:40%;">
     <div class="sk-rect sk-rect-1"></div>
     <div class="sk-rect sk-rect-2"></div>
@@ -124,6 +124,12 @@
     <div class="title">工具</div>
 
     <ul>
+
+        <li onclick="history.back(-1);">
+            <i class="iconfont icon-fanhui"></i>
+            返回
+        </li>
+
         <li class="active" id="shoudong">
             <i class="iconfont icon-shou"></i>
             手动
@@ -156,6 +162,7 @@
 </div>
 
 <script type="text/javascript" src='//webapi.amap.com/maps?v=1.4.10&key=ede2682da4d13e2ce1969503bef252a1&plugin=ElasticMarker,AMap.Autocomplete,AMap.PlaceSearch'></script>
+<script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
 <script src="js/common.js"></script>
 <script src="lib/jquery.js"></script>
 <script src="lib/layer/layer.js"></script>
@@ -416,7 +423,7 @@
         zooms:[14,20],
         zoom:18,
         pitch:55,
-        center:[121.498672,31.235818],
+        center:[121.499421,31.235048],
         forceVector:true
     });
 
@@ -429,82 +436,179 @@
 
     var facilities = [];
     var pointList=[];
-    var zoomStyleMapping1 = {
-        14:0,
-        15:0,
-        16:0,
-        17:0,
-        18:0,
-        19:0,
-        20:0
-    };
+
+    AMapUI.load(['ui/misc/PointSimplifier', 'lib/$'], function(PointSimplifier, $) {
+
+        if (!PointSimplifier.supportCanvas) {
+            alert('当前环境不支持 Canvas！');
+            return;
+        }
+
+        initPage(PointSimplifier, $);
+    });
+
+    function initPage(PointSimplifier,$)
+    {
 
 
-    $.ajax({
-        url: serverUrl + 'get-covers',
-        type: 'get',
-        dataType: 'json',
-        success: function (data) {
 
-            if(data.code==0)
-            {
-                pointList=data.data;
-                for(var i=0;i<data.data.length;i++)
+        var pointSimplifierIns;
+        var groupStyleMap;
+
+        $.ajax({
+            url: serverUrl + 'get-covers',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+
+                if(data.code==0)
                 {
-
-                    if(data.data[i].diameter<=300)
+                    pointList=data.data;
+                    for(var i=0;i<data.data.length;i++)
                     {
-                        var imgUlr="img/1.png";
-                    }
-                    else if(data.data[i].diameter>300&&data.data[i].diameter<=500)
-                    {
-                        var imgUlr="img/2.png";
-                    }
-                    else
-                    {
-                        var imgUlr="img/3.png";
+                        var obj={};
+                        if(data.data[i].diameter<=300)
+                        {
+                            obj.groupId=0;
+                        }
+                        else if(data.data[i].diameter>300&&data.data[i].diameter<=500)
+                        {
+                            obj.groupId=1;
+                        }
+                        else
+                        {
+                            obj.groupId=2;
+                        }
+                        obj.lngLatLine=data.data[i].lon+","+data.data[i].lat;
+
+                        facilities.push(obj);
+
                     }
 
 
-                    var marker = new AMap.ElasticMarker({
-                        position:[data.data[i].lon, data.data[i].lat],
-                        title:"编号："+data.data[i].id,
-                        styles:[{
-                            icon:{
-                                img:imgUlr,
-                                size:[12,12],//可见区域的大小
-                                ancher:[6,6],//锚点
-                                fitZoom:14,//最合适的级别
-                                scaleFactor:2,//地图放大一级的缩放比例系数
-                                maxScale:2,//最大放大比例
-                                minScale:0.5//最小放大比例
+                    pointSimplifierIns = new PointSimplifier({
+                        zIndex: 115,
+                        autoSetFitView: false,
+                        map: map, //所属的地图实例
+
+                        getPosition: function(item) {
+
+                            var lngLatLine = item.lngLatLine;
+
+                            if (!lngLatLine) {
+                                return null;
                             }
 
+                            var parts = lngLatLine.split(',');
 
-                        }],
-                        zoomStyleMapping:zoomStyleMapping1
+                            return [parseFloat(parts[0]), parseFloat(parts[1])];
+                        },
+                        getHoverTitle: function(dataItem, idx) {
+                            return '编号: ' + idx;
+                        },
+                        //使用GroupStyleRender
+                        renderConstructor: PointSimplifier.Render.Canvas.GroupStyleRender,
+                        renderOptions: {
+                            //点的样式
+                            pointStyle: {
+                                width: 10,
+                                height: 10,
+                                fillStyle:'#ffffff'
+                            },
+                            getGroupId: function(item, idx) {
+
+                                return item.groupId;
+                            },
+                            groupStyleOptions: function(gid) {
+
+                                return groupStyleMap[gid];
+                            }
+
+                        }
                     });
-                    marker.mid=data.data[i].id;
 
-                    AMap.event.addListener(marker, 'mouseover', function(e) {
-                        //console.log(e.target.A.L.Vg);
 
-                        var mid=e.target.mid;
-                        e.target.setTitle("编号："+mid);
-                        /* console.log(mid);*/
+                    groupStyleMap = {
+                        '0': {
+                            pointStyle: {
+                                //绘制点占据的矩形区域
+                                content: PointSimplifier.Render.Canvas.getImageContent(
+                                        './img/1.png', onIconLoad, onIconError),
+                                //宽度
+                                width: 30,
+                                //高度
+                                height: 30,
+                                //定位点为中心
+                                offset: ['-50%', '-50%'],
+                                fillStyle: "#ffffff",
+                                strokeStyle: '#000000'
+                            }
+                        },
+                        '1': {
+                            pointStyle: {
+                                //绘制点占据的矩形区域
+                                content: PointSimplifier.Render.Canvas.getImageContent(
+                                        './img/2.png', onIconLoad, onIconError),
+                                //宽度
+                                width: 30,
+                                //高度
+                                height: 30,
+                                //定位点为中心
+                                offset: ['-50%', '-50%'],
+                                fillStyle: "#fff",
+                                // strokeStyle: null
+                            }
+                        },
+                        '2': {
+                            pointStyle: {
+                                //绘制点占据的矩形区域
+                                content: PointSimplifier.Render.Canvas.getImageContent(
+                                        './img/3.png', onIconLoad, onIconError),
+                                //宽度
+                                width: 30,
+                                //高度
+                                height: 30,
+                                //定位点为中心
+                                offset: ['-50%', '-50%'],
+                                fillStyle: "#fff",
+                                //strokeStyle: null
+                            }
+                        },
+                        '3': {
+                            pointStyle: {
+                                //绘制点占据的矩形区域
+                                content: PointSimplifier.Render.Canvas.getImageContent(
+                                        './img/4.png', onIconLoad, onIconError),
+                                //宽度
+                                width: 30,
+                                //高度
+                                height: 30,
+                                //定位点为中心
+                                offset: ['-50%', '-50%'],
+                                fillStyle: "#fff",
+                                //strokeStyle: null
+                            }
+                        }
+                    };
 
-                    }, false);
+                    function onIconLoad() {
+                        pointSimplifierIns.renderLater();
+                    }
 
-                    facilities.push(marker);
+                    function onIconError(e) {
+                        //alert('图片加载失败！');
+                    }
+
+
+                    pointSimplifierIns.setData(facilities);
+
+                    getAreas();
                 }
 
-                map.add(facilities)
-
-                getAreas();
             }
+        });
+    }
 
-        }
-    });
 
 
     //获取点击坐标
@@ -575,7 +679,7 @@
     function getAreas()
     {
         $.ajax({
-            url: serverUrl + 'get-areas?areatype=1',
+            url: serverUrl + 'get-areas?areatype=2',
             type: 'get',
             dataType: 'json',
             success: function (data) {
@@ -621,7 +725,7 @@
                                 strokeColor: "#FF33FF", //线颜色
                                 strokeOpacity: 0.8, //线透明度
                                 strokeWeight: 2,    //线宽
-                                visible:false,
+                                visible:true,
                                 fillColor: "#1791fc", //填充色
                                 fillOpacity: 0.35//填充透明度
                             });
@@ -630,7 +734,7 @@
                             polygon.m_name=data.data[i].name;
                             polygon.covernum=data.data[i].covernum;
 
-                            console.log("polygon"+polygon);
+                            //console.log("polygon"+polygon);
                             polygonList.push(polygon);
                             AMap.event.addListener(polygon, 'mouseover', function(e) {
 
@@ -683,7 +787,106 @@
                             }, false);
 
                             polygon.setMap(map);
+
+
                         }
+                        else if(polygonArr.length==1)
+                        {
+                            var fangda=0.0001;
+                            var newPolygonArr=[];
+                            newPolygonArr[0]=[polygonArr[0][0]-fangda,polygonArr[0][1]+fangda];
+                            newPolygonArr[1]=[polygonArr[0][0]+fangda,polygonArr[0][1]+fangda];
+                            newPolygonArr[2]=[polygonArr[0][0]+fangda,polygonArr[0][1]-fangda];
+                            newPolygonArr[3]=[polygonArr[0][0]-fangda,polygonArr[0][1]-fangda];
+                            var list=newPolygonArr;
+                            console.log("一个点");
+                            console.log(list);
+
+                            var  polygon = new AMap.Polygon({
+                                path: list,//设置多边形边界路径
+                                strokeColor: "#FF33FF", //线颜色
+                                strokeOpacity: 0.8, //线透明度
+                                strokeWeight: 2,    //线宽
+                                visible:true,
+                                fillColor: "#1791fc", //填充色
+                                fillOpacity: 0.35//填充透明度
+                            });
+
+                            polygon.mid=data.data[i].covers;
+                            polygon.m_name=data.data[i].name;
+                            polygon.covernum=data.data[i].covernum;
+
+                            //console.log("polygon"+polygon);
+                            polygonList.push(polygon);
+                            AMap.event.addListener(polygon, 'mouseover', function(e) {
+
+                                selectedMarker=[];
+                                console.log(e.target.mid);
+                                var pList=e.target.mid.split(",");
+                                $("#noList").html("<div><label>区块名称：</label>"+ e.target.m_name+"</div><div><label>阀门编号：</label>"+e.target.mid+"</div><div><label>阀门个数：</label>"+ e.target.covernum+"</div>");
+                                $("#noList").show();
+                                e.target.setOptions({"fillColor":"#8968CD",fillOpacity:0.8});
+
+                                for(var j=0;j<pList.length;j++)
+                                {
+                                    for(var i=0;i<facilities.length;i++)
+                                    {
+                                        if(pList[j]==facilities[i].mid)
+                                        {
+                                            var obj=facilities[i].A.L.Vg;
+                                            $(obj).addClass("active");
+                                            selectedMarker.push(facilities[i]);
+                                            break;
+                                        }
+                                    }
+                                }
+
+
+
+                            }, false);
+
+                            AMap.event.addListener(polygon, 'mouseout', function(e) {
+
+                                console.log(e.target.mid);
+                                $("#noList").hide();
+                                e.target.setOptions({"fillColor":"#1791fc",fillOpacity:0.35});
+                                var pList=e.target.mid.split(",");
+                                for(var j=0;j<pList.length;j++)
+                                {
+                                    for(var i=0;i<facilities.length;i++)
+                                    {
+                                        if(pList[j]==facilities[i].mid)
+                                        {
+                                            var obj=facilities[i].A.L.Vg;
+                                            $(obj).removeClass("active");
+                                            selectedMarker.push(facilities[i]);
+                                            break;
+                                        }
+                                    }
+                                }
+
+
+                            }, false);
+
+                            polygon.setMap(map);
+
+
+
+                        }
+                        else if(polygonArr.length==2)
+                        {
+                            var Ax=polygonArr[0][0];
+                            var Ay=polygonArr[0][1];
+                            var Bx=polygonArr[1][0];
+                            var By=polygonArr[1][1];
+                            var k=-(Bx-Ax)/(By-Ay);
+                            var b1=Ay-k*Ax;
+
+
+
+                        }
+
+
 
 
 
