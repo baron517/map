@@ -228,11 +228,12 @@
                 {
                     areaPoint=areaPoint+","+pointList[i].id;
                     newPoint.push(point);
-                    console.log(areaPoint);
                 }
             }
 
             areaPoint=areaPoint.substr(1);
+
+            console.log(areaPoint);
 
             if(areaPoint.length>0)
             {
@@ -480,7 +481,7 @@
                             obj.groupId=2;
                         }
                         obj.lngLatLine=data.data[i].lon+","+data.data[i].lat;
-
+                        obj.name=data.data[i].id;
                         facilities.push(obj);
 
                     }
@@ -504,7 +505,7 @@
                             return [parseFloat(parts[0]), parseFloat(parts[1])];
                         },
                         getHoverTitle: function(dataItem, idx) {
-                            return '编号: ' + idx;
+                            return '编号: ' + dataItem.name;
                         },
                         //使用GroupStyleRender
                         renderConstructor: PointSimplifier.Render.Canvas.GroupStyleRender,
@@ -615,13 +616,14 @@
     var circlePointList=[];
     var circleMarkerList=[];
     var polyline;
-    map.on('click',function(e){
-        console.log(e.lnglat);
 
-        circlePointList.push(e.lnglat);
+    function clickArea(lnglat)
+    {
+
+        circlePointList.push(lnglat);
 
         // 创建折线实例
-        var juli=Math.sqrt((e.lnglat.lng-circlePointList[0].lng)*(e.lnglat.lng-circlePointList[0].lng)+(e.lnglat.lat-circlePointList[0].lat)*(e.lnglat.lat-circlePointList[0].lat));
+        var juli=Math.sqrt((lnglat.lng-circlePointList[0].lng)*(lnglat.lng-circlePointList[0].lng)+(lnglat.lat-circlePointList[0].lat)*(lnglat.lat-circlePointList[0].lat));
 
         console.log(juli);
 
@@ -647,7 +649,7 @@
         }
 
         var circleMarker = new AMap.CircleMarker({
-            center:e.lnglat,
+            center:lnglat,
             radius:5,//3D视图下，CircleMarker半径不要超过64px
             strokeColor:'white',
             strokeWeight:2,
@@ -668,14 +670,83 @@
 
 
 
+    }
 
+    map.on('click',function(e){
+        console.log(e.lnglat);
 
+        clickArea(e.lnglat);
 
     })
 
 
     var selectedMarker=[];
     var polygonList=[];
+
+    function eventArea(polygon)
+    {
+
+        AMap.event.addListener(polygon, 'mouseover', function(e) {
+
+            selectedMarker=[];
+            console.log(e.target.mid);
+            var pList=e.target.mid.split(",");
+            $("#noList").html("<div><label>区块名称：</label>"+ e.target.m_name+"</div><div><label>阀门编号：</label>"+e.target.mid+"</div><div><label>阀门个数：</label>"+ e.target.covernum+"</div>");
+            $("#noList").show();
+            e.target.setOptions({"fillColor":"#8968CD",fillOpacity:0.8});
+
+            for(var j=0;j<pList.length;j++)
+            {
+                for(var i=0;i<facilities.length;i++)
+                {
+                    if(pList[j]==facilities[i].mid)
+                    {
+                        var obj=facilities[i].A.L.Vg;
+                        $(obj).addClass("active");
+                        selectedMarker.push(facilities[i]);
+                        break;
+                    }
+                }
+            }
+
+
+
+        }, false);
+
+        AMap.event.addListener(polygon, 'mouseout', function(e) {
+
+            console.log(e.target.mid);
+            $("#noList").hide();
+            e.target.setOptions({"fillColor":"#1791fc",fillOpacity:0.35});
+            var pList=e.target.mid.split(",");
+            for(var j=0;j<pList.length;j++)
+            {
+                for(var i=0;i<facilities.length;i++)
+                {
+                    if(pList[j]==facilities[i].mid)
+                    {
+                        var obj=facilities[i].A.L.Vg;
+                        $(obj).removeClass("active");
+                        selectedMarker.push(facilities[i]);
+                        break;
+                    }
+                }
+            }
+
+
+        }, false);
+
+
+        AMap.event.addListener(polygon, 'click', function(e){
+
+            clickArea(e.lnglat);
+
+        },false)
+
+        polygon.setMap(map);
+
+    }
+
     function getAreas()
     {
         $.ajax({
@@ -736,58 +807,8 @@
 
                             //console.log("polygon"+polygon);
                             polygonList.push(polygon);
-                            AMap.event.addListener(polygon, 'mouseover', function(e) {
 
-                                selectedMarker=[];
-                                console.log(e.target.mid);
-                                var pList=e.target.mid.split(",");
-                                $("#noList").html("<div><label>区块名称：</label>"+ e.target.m_name+"</div><div><label>阀门编号：</label>"+e.target.mid+"</div><div><label>阀门个数：</label>"+ e.target.covernum+"</div>");
-                                $("#noList").show();
-                                e.target.setOptions({"fillColor":"#8968CD",fillOpacity:0.8});
-
-                                for(var j=0;j<pList.length;j++)
-                                {
-                                    for(var i=0;i<facilities.length;i++)
-                                    {
-                                        if(pList[j]==facilities[i].mid)
-                                        {
-                                            var obj=facilities[i].A.L.Vg;
-                                            $(obj).addClass("active");
-                                            selectedMarker.push(facilities[i]);
-                                            break;
-                                        }
-                                    }
-                                }
-
-
-
-                            }, false);
-
-                            AMap.event.addListener(polygon, 'mouseout', function(e) {
-
-                                console.log(e.target.mid);
-                                $("#noList").hide();
-                                e.target.setOptions({"fillColor":"#1791fc",fillOpacity:0.35});
-                                var pList=e.target.mid.split(",");
-                                for(var j=0;j<pList.length;j++)
-                                {
-                                    for(var i=0;i<facilities.length;i++)
-                                    {
-                                        if(pList[j]==facilities[i].mid)
-                                        {
-                                            var obj=facilities[i].A.L.Vg;
-                                            $(obj).removeClass("active");
-                                            selectedMarker.push(facilities[i]);
-                                            break;
-                                        }
-                                    }
-                                }
-
-
-                            }, false);
-
-                            polygon.setMap(map);
-
+                            eventArea(polygon);
 
                         }
                         else if(polygonArr.length==1)
@@ -799,7 +820,6 @@
                             newPolygonArr[2]=[polygonArr[0][0]+fangda,polygonArr[0][1]-fangda];
                             newPolygonArr[3]=[polygonArr[0][0]-fangda,polygonArr[0][1]-fangda];
                             var list=newPolygonArr;
-                            console.log("一个点");
                             console.log(list);
 
                             var  polygon = new AMap.Polygon({
@@ -818,69 +838,63 @@
 
                             //console.log("polygon"+polygon);
                             polygonList.push(polygon);
-                            AMap.event.addListener(polygon, 'mouseover', function(e) {
 
-                                selectedMarker=[];
-                                console.log(e.target.mid);
-                                var pList=e.target.mid.split(",");
-                                $("#noList").html("<div><label>区块名称：</label>"+ e.target.m_name+"</div><div><label>阀门编号：</label>"+e.target.mid+"</div><div><label>阀门个数：</label>"+ e.target.covernum+"</div>");
-                                $("#noList").show();
-                                e.target.setOptions({"fillColor":"#8968CD",fillOpacity:0.8});
-
-                                for(var j=0;j<pList.length;j++)
-                                {
-                                    for(var i=0;i<facilities.length;i++)
-                                    {
-                                        if(pList[j]==facilities[i].mid)
-                                        {
-                                            var obj=facilities[i].A.L.Vg;
-                                            $(obj).addClass("active");
-                                            selectedMarker.push(facilities[i]);
-                                            break;
-                                        }
-                                    }
-                                }
-
-
-
-                            }, false);
-
-                            AMap.event.addListener(polygon, 'mouseout', function(e) {
-
-                                console.log(e.target.mid);
-                                $("#noList").hide();
-                                e.target.setOptions({"fillColor":"#1791fc",fillOpacity:0.35});
-                                var pList=e.target.mid.split(",");
-                                for(var j=0;j<pList.length;j++)
-                                {
-                                    for(var i=0;i<facilities.length;i++)
-                                    {
-                                        if(pList[j]==facilities[i].mid)
-                                        {
-                                            var obj=facilities[i].A.L.Vg;
-                                            $(obj).removeClass("active");
-                                            selectedMarker.push(facilities[i]);
-                                            break;
-                                        }
-                                    }
-                                }
-
-
-                            }, false);
-
-                            polygon.setMap(map);
+                            eventArea(polygon);
 
 
 
                         }
                         else if(polygonArr.length==2)
                         {
+
+                            console.log("二个点");
+                            var fangda=0.001;
                             var Ax=polygonArr[0][0];
                             var Ay=polygonArr[0][1];
                             var Bx=polygonArr[1][0];
                             var By=polygonArr[1][1];
                             var k=-(Bx-Ax)/(By-Ay);
-                            var b1=Ay-k*Ax;
+                            if(By==Ay)
+                            {
+                                var jiaodu=90;
+                            }
+                            else {
+                                var jiaodu=180*Math.atan(k)/Math.PI;
+                            }
+                            var x2=Ax+fangda*Math.cos(jiaodu);
+                            var y2=Ay+fangda*Math.sin(jiaodu);
+
+                            var x1=Ax-fangda*Math.cos(jiaodu);
+                            var y1=Ay-fangda*Math.sin(jiaodu);
+
+                            var x3=Bx+fangda*Math.cos(jiaodu);
+                            var y3=By+fangda*Math.sin(jiaodu);
+
+                            var x4=Bx-fangda*Math.cos(jiaodu);
+                            var y5=By-fangda*Math.sin(jiaodu);
+                            var list=[];
+                            list.push([x1,y1],[x2,y2],[x3,y3],[x4,y5]);
+                            console.log(list);
+
+                            var  polygon = new AMap.Polygon({
+                                path: list,//设置多边形边界路径
+                                strokeColor: "#FF33FF", //线颜色
+                                strokeOpacity: 0.8, //线透明度
+                                strokeWeight: 2,    //线宽
+                                visible:true,
+                                fillColor: "#1791fc", //填充色
+                                fillOpacity: 0.35//填充透明度
+                            });
+
+                            polygon.mid=data.data[i].covers;
+                            polygon.m_name=data.data[i].name;
+                            polygon.covernum=data.data[i].covernum;
+
+                            //console.log("polygon"+polygon);
+                            polygonList.push(polygon);
+
+                            eventArea(polygon);
+
 
 
 
