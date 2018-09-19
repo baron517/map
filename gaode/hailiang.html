@@ -37,7 +37,8 @@
 <script type="text/javascript">
     //创建地图
     var map = new AMap.Map('container', {
-        zoom: 18
+        zoom: 18,
+        center:[114.673903,23.756235]
     });
 
     //just some colors
@@ -77,9 +78,13 @@
             renderOptions: {
                 //点的样式
                 pointStyle: {
-                    width: 5,
-                    height: 5,
+                    width: 20,
+                    height: 20,
                     fillStyle:'#A2D0FA'
+                },
+                pointHardcoreStyle:{
+                    width: 1,
+                    height: 1,
                 },
                 getGroupId: function(item, idx) {
 
@@ -165,7 +170,7 @@
         };
 
         $('<div id="loadingTip">加载数据，请稍候...</div>').appendTo(document.body);
-        $.get('http://localhost:8888/map/gaode/1.txt', function(csv) {
+        $.get('http://localhost:9999/map/gaode/1.txt', function(csv) {
 
             $('#loadingTip').remove();
 

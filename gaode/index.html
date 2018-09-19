@@ -102,7 +102,7 @@
 
 <body>
 
-<div style="position: absolute;width:100%;height:100%;top:0;left:0;z-index:10000;background: rgba(0,0,0,0.5);display: none;" id="loading">
+<div style="position: absolute;width:100%;height:100%;top:0;left:0;z-index:10000;background: rgba(0,0,0,0.5);" id="loading">
 <div class="sk-wave" style="position: relative;top:40%;">
     <div class="sk-rect sk-rect-1"></div>
     <div class="sk-rect sk-rect-2"></div>
@@ -170,14 +170,14 @@
 
     $("#clear").click(function()
     {
-        clear();
+        clear(1);
     });
 
     $(document).keyup(function(event){
 
         switch(event.keyCode) {
             case 27:
-                clear();
+                clear(0);
 
         }
     });
@@ -200,7 +200,7 @@
     }
 
 
-
+    var addPolygonList=[];
     function save()
     {
         if(circlePointList.length<3)
@@ -235,7 +235,7 @@
 
             console.log(areaPoint);
 
-            if(areaPoint.length>0)
+            if(newPoint.length>0)
             {
                 layer.prompt({title: '输入区块名称', formType: 0,
                     btn2: function(index, layero){
@@ -262,12 +262,13 @@
                         console.log(data);
                         if(data.code==0)
                         {
-                            clear();
+                            clear(1);
 
 
                             var res=[];
                             var n=newPoint.length;
 
+                            console.log("n::::::"+n);
                             if(n>2)
                             {
                                 Graham_scan(newPoint,res,n);
@@ -277,77 +278,80 @@
                                 var list=computeLine(0.00008,ndpArray,pArray);
 
                                 //console.log(list);
+                            }
+                            else if(n==2)
+                            {
 
-                                var  newPolygon = new AMap.Polygon({
-                                    path: list,//设置多边形边界路径
-                                    strokeColor: "#FF33FF", //线颜色
-                                    strokeOpacity: 0.8, //线透明度
-                                    strokeWeight: 2,    //线宽
-                                    fillColor: "#1791fc", //填充色
-                                    fillOpacity: 0.35//填充透明度
-                                });
+                                console.log("二个点");
+                                console.log(newPoint);
+                                var fangda=0.0001;
+                                var Ax=newPoint[0][0];
+                                var Ay=newPoint[0][1];
+                                var Bx=newPoint[1][0];
+                                var By=newPoint[1][1];
+                                var k=-(Bx-Ax)/(By-Ay);
+                                if(By==Ay)
+                                {
+                                    var jiaodu=Math.PI/2;
+                                }
+                                else {
+                                    var jiaodu=Math.atan(k);
+                                }
+                                var x2=Ax+fangda*Math.cos(jiaodu);
+                                var y2=Ay+fangda*Math.sin(jiaodu);
 
-                                newPolygon.mid=areaPoint;
-                                newPolygon.m_name=pass;
-                                newPolygon.covernum=n;
+                                var x1=Ax-fangda*Math.cos(jiaodu);
+                                var y1=Ay-fangda*Math.sin(jiaodu);
 
-                                AMap.event.addListener(newPolygon, 'mouseover', function(e) {
+                                var x3=Bx+fangda*Math.cos(jiaodu);
+                                var y3=By+fangda*Math.sin(jiaodu);
 
-                                    selectedMarker=[];
-                                    console.log(e.target.mid);
-                                    var pList=e.target.mid.split(",");
-                                    $("#noList").html("<div><label>区块名称：</label>"+ e.target.m_name+"</div><div><label>阀门编号：</label>"+e.target.mid+"</div><div><label>阀门个数：</label>"+ e.target.covernum+"</div>");
-                                    $("#noList").show();
-                                    e.target.setOptions({"fillColor":"#8968CD",fillOpacity:0.8});
-
-                                    for(var j=0;j<pList.length;j++)
-                                    {
-                                        for(var i=0;i<facilities.length;i++)
-                                        {
-                                            if(pList[j]==facilities[i].mid)
-                                            {
-                                                var obj=facilities[i].A.L.Vg;
-                                                $(obj).addClass("active");
-                                                selectedMarker.push(facilities[i]);
-                                                break;
-                                            }
-                                        }
-                                    }
+                                var x4=Bx-fangda*Math.cos(jiaodu);
+                                var y5=By-fangda*Math.sin(jiaodu);
+                                var twoPointPolygon=[];
+                                twoPointPolygon.push([x1,y1],[x2,y2],[x3,y3],[x4,y5]);
 
 
+                                var res=[];
+                                var n=twoPointPolygon.length;
+                                Graham_scan(twoPointPolygon,res,n);
+                                var pArray=res;
+                                var dpArray=initDPList(pArray);
+                                var ndpArray=initNDPList(dpArray);
+                                var list=computeLine(0.00008,ndpArray,pArray);
 
-                                }, false);
-
-                                AMap.event.addListener(newPolygon, 'mouseout', function(e) {
-
-                                    console.log(e.target.mid);
-                                    $("#noList").hide();
-                                    e.target.setOptions({"fillColor":"#1791fc",fillOpacity:0.35});
-                                    var pList=e.target.mid.split(",");
-                                    for(var j=0;j<pList.length;j++)
-                                    {
-                                        for(var i=0;i<facilities.length;i++)
-                                        {
-                                            if(pList[j]==facilities[i].mid)
-                                            {
-                                                var obj=facilities[i].A.L.Vg;
-                                                $(obj).removeClass("active");
-                                                selectedMarker.push(facilities[i]);
-                                                break;
-                                            }
-                                        }
-                                    }
-
-
-                                }, false);
-
-                                newPolygon.setMap(map);
-
-
-
-
+                                console.log(list);
 
                             }
+                            else if(n==1)
+                            {
+
+                                console.log("一个点");
+                                var fangda=0.0001;
+                                var newPolygonArr=[];
+                                newPolygonArr[0]=[newPoint[0][0]-fangda,newPoint[0][1]+fangda];
+                                newPolygonArr[1]=[newPoint[0][0]+fangda,newPoint[0][1]+fangda];
+                                newPolygonArr[2]=[newPoint[0][0]+fangda,newPoint[0][1]-fangda];
+                                newPolygonArr[3]=[newPoint[0][0]-fangda,newPoint[0][1]-fangda];
+                                var list=newPolygonArr;
+                                console.log(list);
+
+                            }
+
+                            var  newPolygon = new AMap.Polygon({
+                                path: list,//设置多边形边界路径
+                                strokeColor: "#FF33FF", //线颜色
+                                strokeOpacity: 0.8, //线透明度
+                                strokeWeight: 2,    //线宽
+                                fillColor: "#1791fc", //填充色
+                                fillOpacity: 0.35//填充透明度
+                            });
+
+                            newPolygon.mid=areaPoint;
+                            newPolygon.m_name=pass;
+                            newPolygon.covernum=n;
+                            addPolygonList.push(newPolygon);
+                            eventArea(newPolygon);
 
 
                             layer.alert("创建区块成功");
@@ -379,7 +383,7 @@
     }
 
 
-    function clear()
+    function clear(value)
     {
         for(var i=0;i<circleMarkerList.length;i++)
         {
@@ -388,6 +392,14 @@
         circleMarkerList=[];
         circlePointList=[];
         map.remove(polyline);
+
+        if(value==1)
+        {
+            for(var i=0;i<addPolygonList.length;i++)
+            {
+                map.remove(addPolygonList[i]);
+            }
+        }
 
     }
 
@@ -400,6 +412,7 @@
         {
             polygonList[i].hide();
         }
+        $("#clear").show();
     });
 
     $("#zidong").click(function()
@@ -410,6 +423,12 @@
         {
             polygonList[i].show();
         }
+
+        for(var i=0;i<addPolygonList.length;i++)
+        {
+            addPolygonList[i].hide();
+        }
+        $("#clear").hide();
 
     });
 
@@ -448,14 +467,12 @@
         initPage(PointSimplifier, $);
     });
 
+
+    var pointSimplifierIns;
+    var groupStyleMap;
+
     function initPage(PointSimplifier,$)
     {
-
-
-
-        var pointSimplifierIns;
-        var groupStyleMap;
-
         $.ajax({
             url: serverUrl + 'get-covers',
             type: 'get',
@@ -482,13 +499,13 @@
                         }
                         obj.lngLatLine=data.data[i].lon+","+data.data[i].lat;
                         obj.name=data.data[i].id;
+                        obj.pId=obj.groupId;
                         facilities.push(obj);
 
                     }
 
 
                     pointSimplifierIns = new PointSimplifier({
-                        zIndex: 115,
                         autoSetFitView: false,
                         map: map, //所属的地图实例
 
@@ -512,9 +529,13 @@
                         renderOptions: {
                             //点的样式
                             pointStyle: {
-                                width: 10,
-                                height: 10,
+                                width: 30,
+                                height: 30,
                                 fillStyle:'#ffffff'
+                            },
+                            pointHardcoreStyle:{
+                                width: 1,
+                                height: 1,
                             },
                             getGroupId: function(item, idx) {
 
@@ -603,6 +624,11 @@
 
                     pointSimplifierIns.setData(facilities);
 
+                    pointSimplifierIns.on('pointClick', function(e, record) {
+                       /* facilities[record.index].groupId=3;
+                        pointSimplifierIns.renderLater();*/
+                    });
+
                     getAreas();
                 }
 
@@ -619,6 +645,11 @@
 
     function clickArea(lnglat)
     {
+
+        if(!$("#shoudong").hasClass("active"))
+        {
+            return;
+        }
 
         circlePointList.push(lnglat);
 
@@ -645,7 +676,7 @@
         if(circlePointList.length>2&&juli<0.00005)
         {
             save();
-            return;
+            return false;
         }
 
         var circleMarker = new AMap.CircleMarker({
@@ -656,13 +687,22 @@
             strokeOpacity:0.5,
             fillColor:'rgba(0,0,255,1)',
             fillOpacity:0.5,
-            zIndex:10,
+            zIndex:10000,
             bubble:true,
             cursor:'pointer',
             clickable: true
         })
 
         circleMarkerList.push(circleMarker);
+
+        $("#noList").html("按ESC键清除连线和点");
+        $("#noList").fadeIn();
+        setTimeout(function()
+        {
+            $("#noList").fadeOut();
+        },2000);
+
+
 
         circleMarker.setMap(map);
 
@@ -680,7 +720,6 @@
     })
 
 
-    var selectedMarker=[];
     var polygonList=[];
 
     function eventArea(polygon)
@@ -688,7 +727,6 @@
 
         AMap.event.addListener(polygon, 'mouseover', function(e) {
 
-            selectedMarker=[];
             console.log(e.target.mid);
             var pList=e.target.mid.split(",");
             $("#noList").html("<div><label>区块名称：</label>"+ e.target.m_name+"</div><div><label>阀门编号：</label>"+e.target.mid+"</div><div><label>阀门个数：</label>"+ e.target.covernum+"</div>");
@@ -699,16 +737,14 @@
             {
                 for(var i=0;i<facilities.length;i++)
                 {
-                    if(pList[j]==facilities[i].mid)
+                    if(pList[j]==facilities[i].name)
                     {
-                        var obj=facilities[i].A.L.Vg;
-                        $(obj).addClass("active");
-                        selectedMarker.push(facilities[i]);
+                        facilities[i].groupId=3;
                         break;
                     }
                 }
             }
-
+            pointSimplifierIns.renderLater();
 
 
         }, false);
@@ -723,16 +759,15 @@
             {
                 for(var i=0;i<facilities.length;i++)
                 {
-                    if(pList[j]==facilities[i].mid)
+                    if(pList[j]==facilities[i].name)
                     {
-                        var obj=facilities[i].A.L.Vg;
-                        $(obj).removeClass("active");
-                        selectedMarker.push(facilities[i]);
+                        facilities[i].groupId=facilities[i].pId;
                         break;
                     }
                 }
             }
 
+            pointSimplifierIns.renderLater();
 
         }, false);
 
@@ -750,7 +785,7 @@
     function getAreas()
     {
         $.ajax({
-            url: serverUrl + 'get-areas?areatype=2',
+            url: serverUrl + 'get-areas?areatype=1',
             type: 'get',
             dataType: 'json',
             success: function (data) {
@@ -791,25 +826,6 @@
                             /*console.log(polygonArr);
                              console.log(list);*/
 
-                            var  polygon = new AMap.Polygon({
-                                path: list,//设置多边形边界路径
-                                strokeColor: "#FF33FF", //线颜色
-                                strokeOpacity: 0.8, //线透明度
-                                strokeWeight: 2,    //线宽
-                                visible:true,
-                                fillColor: "#1791fc", //填充色
-                                fillOpacity: 0.35//填充透明度
-                            });
-
-                            polygon.mid=data.data[i].covers;
-                            polygon.m_name=data.data[i].name;
-                            polygon.covernum=data.data[i].covernum;
-
-                            //console.log("polygon"+polygon);
-                            polygonList.push(polygon);
-
-                            eventArea(polygon);
-
                         }
                         else if(polygonArr.length==1)
                         {
@@ -822,33 +838,13 @@
                             var list=newPolygonArr;
                             console.log(list);
 
-                            var  polygon = new AMap.Polygon({
-                                path: list,//设置多边形边界路径
-                                strokeColor: "#FF33FF", //线颜色
-                                strokeOpacity: 0.8, //线透明度
-                                strokeWeight: 2,    //线宽
-                                visible:true,
-                                fillColor: "#1791fc", //填充色
-                                fillOpacity: 0.35//填充透明度
-                            });
-
-                            polygon.mid=data.data[i].covers;
-                            polygon.m_name=data.data[i].name;
-                            polygon.covernum=data.data[i].covernum;
-
-                            //console.log("polygon"+polygon);
-                            polygonList.push(polygon);
-
-                            eventArea(polygon);
-
-
-
                         }
                         else if(polygonArr.length==2)
                         {
 
                             console.log("二个点");
-                            var fangda=0.001;
+                            console.log(polygonArr);
+                            var fangda=0.0001;
                             var Ax=polygonArr[0][0];
                             var Ay=polygonArr[0][1];
                             var Bx=polygonArr[1][0];
@@ -856,10 +852,10 @@
                             var k=-(Bx-Ax)/(By-Ay);
                             if(By==Ay)
                             {
-                                var jiaodu=90;
+                                var jiaodu=Math.PI/2;
                             }
                             else {
-                                var jiaodu=180*Math.atan(k)/Math.PI;
+                                var jiaodu=Math.atan(k);
                             }
                             var x2=Ax+fangda*Math.cos(jiaodu);
                             var y2=Ay+fangda*Math.sin(jiaodu);
@@ -872,33 +868,40 @@
 
                             var x4=Bx-fangda*Math.cos(jiaodu);
                             var y5=By-fangda*Math.sin(jiaodu);
-                            var list=[];
-                            list.push([x1,y1],[x2,y2],[x3,y3],[x4,y5]);
+                            var twoPointPolygon=[];
+                            twoPointPolygon.push([x1,y1],[x2,y2],[x3,y3],[x4,y5]);
+
+
+                            var res=[];
+                            var n=twoPointPolygon.length;
+                            Graham_scan(twoPointPolygon,res,n);
+                            var pArray=res;
+                            var dpArray=initDPList(pArray);
+                            var ndpArray=initNDPList(dpArray);
+                            var list=computeLine(0.00008,ndpArray,pArray);
+
                             console.log(list);
-
-                            var  polygon = new AMap.Polygon({
-                                path: list,//设置多边形边界路径
-                                strokeColor: "#FF33FF", //线颜色
-                                strokeOpacity: 0.8, //线透明度
-                                strokeWeight: 2,    //线宽
-                                visible:true,
-                                fillColor: "#1791fc", //填充色
-                                fillOpacity: 0.35//填充透明度
-                            });
-
-                            polygon.mid=data.data[i].covers;
-                            polygon.m_name=data.data[i].name;
-                            polygon.covernum=data.data[i].covernum;
-
-                            //console.log("polygon"+polygon);
-                            polygonList.push(polygon);
-
-                            eventArea(polygon);
-
-
-
-
                         }
+
+
+                        var  polygon = new AMap.Polygon({
+                            path: list,//设置多边形边界路径
+                            strokeColor: "#FF33FF", //线颜色
+                            strokeOpacity: 0.8, //线透明度
+                            strokeWeight: 2,    //线宽
+                            visible:false,
+                            fillColor: "#1791fc", //填充色
+                            fillOpacity: 0.35//填充透明度
+                        });
+
+                        polygon.mid=data.data[i].covers;
+                        polygon.m_name=data.data[i].name;
+                        polygon.covernum=data.data[i].covernum;
+
+                        //console.log("polygon"+polygon);
+                        polygonList.push(polygon);
+
+                        eventArea(polygon);
 
 
 
